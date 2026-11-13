@@ -1,6 +1,6 @@
-**Spring-Security-Twitter**
+# Spring-Security-Correios
 
-Sistema de registro e listagem de usuários, autenticação JWT, controle de acesso por roles ( administrador e usuário comum ), e CRUD básico de tweets (criar, deletar e listar no feed), tudo protegido por Spring Security e MongoDB como armazenamento.
+Sistema de registro e listagem de usuários, autenticação JWT, controle de acesso por roles (administrador e usuário comum) e gerenciamento básico de correios (criar, excluir e listar correspondências), tudo protegido por Spring Security e utilizando MongoDB como armazenamento.
 
 ---
 
@@ -9,24 +9,23 @@ Sistema de registro e listagem de usuários, autenticação JWT, controle de ace
 * **Inicialização de roles e admin**: Insere papéis `ADMIN` e `BASIC` e cria um usuário administrador padrão.
 * **Cadastro de usuário**: Criação de novos usuários com criptografia de senha.
 * **Autenticação JWT**: Emissão e validação de tokens JWT (acesso e escopos).
-* **CRUD de tweets**: Criação, listagem (feed paginado) e exclusão de tweets.
+* **Gerenciamento de correspondências**: Criação, listagem paginada e exclusão de correspondências.
 * **Controle de acesso**:
-
   * Rota **`/users`** para listagem de usuários restrita a administradores.
-  * Exclusão de tweet permitida apenas ao autor ou a administradores.
+  * Exclusão de correspondências permitida apenas ao remetente ou a administradores.
 
 ---
 
 ## Endpoints
 
-| Método | Rota           | Descrição                             | Acesso      |
-| ------ | -------------- | ------------------------------------- | ----------- |
-| POST   | `/users`       | Cadastra novo usuário                 | Público     |
-| GET    | `/users`       | Lista todos os usuários               | ADMIN only  |
-| POST   | `/login`       | Autentica usuário e retorna token JWT | Público     |
-| POST   | `/tweets`      | Cria um novo tweet                    | Autenticado |
-| DELETE | `/tweets/{id}` | Exclui tweet (autor ou ADMIN)         | Autenticado |
-| GET    | `/feed`        | Retorna feed paginado de tweets       | Autenticado |
+| Método | Rota | Descrição | Acesso |
+|---|---|---|---|
+| POST | `/users` | Cadastra novo usuário | Público |
+| GET | `/users` | Lista todos os usuários | ADMIN |
+| POST | `/login` | Autentica usuário e retorna token JWT | Público |
+| POST | `/correios` | Cria uma nova correspondência | Autenticado |
+| DELETE | `/correios/{id}` | Exclui uma correspondência (remetente ou ADMIN) | Autenticado |
+| GET | `/correios/feed` | Retorna a listagem paginada de correspondências | Autenticado |
 
 ---
 
@@ -96,7 +95,7 @@ A API será iniciada em `http://localhost:8080`.
 
 ## Testes
 
-Todos os endpoints possuem cobertura de testes unitários escritos com **JUnit** e **Mockito**. Para executá-los:
+Os testes unitários utilizam **JUnit** e **Mockito**. Para executá-los:
 
 ```bash
 mvn test
@@ -104,4 +103,4 @@ mvn test
 
 ---
 
-*Desenvolvido como projeto de demonstração de segurança com Spring Security e JWT.*
+*Desenvolvido como projeto de demonstração de gerenciamento de correspondências, utilizando Spring Security, JWT e MongoDB.*
